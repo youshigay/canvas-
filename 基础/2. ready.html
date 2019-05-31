@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    #canvas {
+      width: 800px;
+      height: 800px;
+    }
+  </style>
+  <title>准备工作</title>
+</head>
+<body>
+  <!-- <canvas id="canvas"></canvas> -->
+  <canvas id="canvas" width="800" height="800"></canvas>
+  <script>
+    // window.onload = function() {
+    //   // 获取画布
+    //   const canvas = document.getElementById('canvas');
+    //   const context = canvas.getContext('2d');
+    //   console.log(context);
+    //   context.moveTo(100,100);
+    //   context.lineTo(600,600);
+    //   context.lineWidth = 5;
+    //   context.strokeStyle = "#AA394C";
+    //   context.stroke();
+    // }
+    const p1 = new Promise(function (resolve, reject) {
+      console.log('p1', new Date());
+      setTimeout(() => {
+        reject(new Error('fail'));
+        console.log('after p1', new Date());
+      }, 3000)
+    })
+
+    const p2 = new Promise(function (resolve, reject) {
+      console.log('p2', new Date());
+      setTimeout(() => {
+        resolve(p1);
+        console.log('after p2', new Date());
+      }, 4000)
+    })
+
+    p2
+      .then(result => console.log(result))
+      .catch(error => console.log(error))
+  </script>
+</body>
+</html>
